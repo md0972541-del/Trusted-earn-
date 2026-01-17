@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustEarn - Home</title>
+    <title>TrustEarn - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <h3>ব্যালেন্স: <span id="balance">০.০০</span> ৳</h3>
-        <div class="btn-group">
-            <button onclick="location.href='deposit.html'">ডিপোজিট</button>
-            <button onclick="location.href='withdraw.html'">উইথড্র</button>
+    <div id="loader">লোড হচ্ছে...</div>
+    <div class="card" id="main-content" style="display:none;">
+        <h3>স্বাগতম, <span id="user-name">ইউজার</span></h3>
+        <div class="balance-box">
+            <p>আপনার ব্যালেন্স: <span id="balance">০.০০</span> ৳</p>
+            <p>প্যাকেজ: <span id="pkg-status">নাই</span></p>
         </div>
-        <button class="task-btn" onclick="location.href='task.html'">ডেইলি টাস্ক (Earn)</button>
-        <hr>
-        <a href="https://t.me/Safait2009" class="tg-link">সাপোর্ট টেলিগ্রাম: @Safait2009</a>
+        <div class="btn-group">
+            <button onclick="location.href='packages.html'" style="background:#ffc107;">প্যাকেজ কিনুন</button>
+            <button onclick="location.href='task.html'">ডেইলি টাস্ক</button>
+        </div>
+        <div class="refer-box">
+            <p>রেফার আইডি: <b id="my-ref-id">...</b></p>
+        </div>
+        <button onclick="logout()" class="logout-btn">লগআউট</button>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
