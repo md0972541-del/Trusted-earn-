@@ -1,14 +1,19 @@
-<div class="pkg-container">
-    <div class="pkg">
-        <h4>Silver Plan</h4>
-        <p>দাম: ২০০ ৳</p>
-        <p>কাজ: প্রতিদিন ৫টি (২৫ ৳)</p>
-        <button onclick="buyPkg('Silver', 200)">কিনুন</button>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8"><title>Packages</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pkg-list">
+        <h2>প্যাকেজ (মেয়াদ ১৫ দিন)</h2>
+        <button onclick="buyPkg('Bronze', 100)">Bronze - ১০০ ৳</button>
+        <button onclick="buyPkg('Silver', 300)">Silver - ৩০০ ৳</button>
+        <button onclick="buyPkg('Gold', 500)">Gold - ৫০০ ৳</button>
+        <button onclick="buyPkg('Diamond', 1000)">Diamond - ১০০০ ৳</button>
+        <button onclick="buyPkg('Vip1', 2000)">Vip 1 - ২০০০ ৳</button>
+        <button onclick="buyPkg('Vip2', 3000)">Vip 2 - ৩০০০ ৳</button>
+        <button onclick="buyPkg('Vip3', 5000)">Vip 3 - ৫০০০ ৳</button>
     </div>
-    <div class="pkg">
-        <h4>Gold Plan</h4>
-        <p>দাম: ৫০০ ৳</p>
-        <p>কাজ: প্রতিদিন ১৫টি (৭৫ ৳)</p>
-        <button onclick="buyPkg('Gold', 500)">কিনুন</button>
-    </div>
-</div>
+    <script src="app.js"></script>
+</body>
+</html>
