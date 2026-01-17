@@ -1,29 +1,41 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyA-panokwAfLZD8em4uQ7_Thwk3DmbF_3Q",
-  authDomain: "trustearn-be67f.firebaseapp.com",
-  databaseURL: "https://trustearn-be67f-default-rtdb.firebaseio.com/",
-  projectId: "trustearn-be67f",
-  storageBucket: "trustearn-be67f.firebasestorage.app",
-  messagingSenderId: "809402864977",
-  appId: "1:809402864977:web:c6c4941608d73cdbbfef70"
+// Firebase Config (সাফায়েত, এখানে তোমার নিজের কী-গুলো বসানো আছে)
+const firebaseConfig = { 
+    apiKey: "AIzaSyA-panokwAfLZD8em4uQ7_Thwk3DmbF_3Q", 
+    databaseURL: "https://trustearn-be67f-default-rtdb.firebaseio.com/" 
 };
-
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 const auth = firebase.auth();
+const db = firebase.database();
 
-// উইথড্র ফাংশন (১০% ফি ও 200 টাকা লিমিট)
-function submitWithdraw(amount, number, method) {
-    if(amount < 50) return alert("মিনিমাম ৫০ টাকা লাগবে");
-    let fee = amount * 0.10; [cite: 2026-01-14]
-    let final = amount - fee;
-    db.ref('withdraws').push({
-        user: auth.currentUser.email,
-        amount: amount,
-        finalAmount: final,
-        number: number,
-        method: method,
-        status: "Pending"
+// লগইন/সাইনআপ সিস্টেম
+function handleAuth(type) {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    if(type === 'signup') {
+        auth.createUserWithEmailAndPassword(email, pass).then(res => {
+            // নতুন ইউজারের প্রোফাইল তৈরি [cite: 2026-01-14]
+            db.ref('users/' + res.user.uid).set({
+                balance: 0,
+                package: "None",
+                refBy: document.getElementById('ref-code').value || "Direct"
+            });
+            alert("অ্যাকাউন্ট সফল হয়েছে!");
+        });
+    } else {
+        auth.signInWithEmailAndPassword(email, pass);
+    }
+}
+
+// প্যাকেজ কেনা ও টাকা কাটা [cite: 2026-01-14]
+function buyPkg(name, price) {
+    const user = auth.currentUser;
+    db.ref('users/' + user.uid).once('value', s => {
+        let bal = s.val().balance;
+        if(bal >= price) {
+            db.ref('users/' + user.uid).update({ balance: bal - price, package: name });
+            alert(name + " কেনা সফল!");
+        } else {
+            alert("টাকা নেই! আগে ডিপোজিট করুন।");
+        }
     });
-    alert("সফল! ১০% ফি বাদে পাবেন " + final + " টাকা।");
 }
