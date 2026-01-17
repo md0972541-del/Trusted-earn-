@@ -1,7 +1,58 @@
-<div class="card">
-    <p>বিকাশ: 01615684028 (Personal)</p>
-    <p>নগদ: 01777086173 (Personal)</p>
-    <input type="number" id="dep-amount" placeholder="টাকার পরিমাণ">
-    <input type="text" id="trxid" placeholder="Transaction ID">
-    <button onclick="depositRequest()">রিকোয়েস্ট পাঠান</button>
-</div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit Money</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <h2>টাকা জমা দিন (Deposit)</h2>
+        <div class="payment-info" style="text-align: left; background: #f9f9f9; padding: 10px; border-radius: 8px;">
+            <p>💰 <b>বিকাশ (Personal):</b> 01615684028</p>
+            <p>💰 <b>নগদ (Personal):</b> 01777086173</p>
+            <p><small>*নম্বর কপি করে টাকা পাঠিয়ে নিচের ফর্মটি পূরণ করুন।</small></p>
+        </div>
+        
+        <input type="number" id="dep-amount" placeholder="টাকার পরিমাণ (১০০ - ৫০০০)">
+        <select id="method">
+            <option value="Bkash">বিকাশ</option>
+            <option value="Nagad">নগদ</option>
+        </select>
+        <input type="text" id="trxid" placeholder="Transaction ID (TrxID)">
+        
+        <button onclick="sendDeposit()">ডিপোজিট রিকোয়েস্ট পাঠান</button>
+        <button onclick="location.href='index.html'" style="background:#6c757d;">ফিরে যান</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        function sendDeposit() {
+            const amount = document.getElementById('dep-amount').value;
+            const trx = document.getElementById('trxid').value;
+            const method = document.getElementById('method').value;
+            const user = auth.currentUser;
+
+            if(amount < 100) return alert("মিনিমাম ১০০ টাকা ডিপোজিট করতে হবে।");
+            if(!trx) return alert("TrxID দিন।");
+
+            db.ref('deposit_requests').push({
+                uid: user.uid,
+                email: user.email,
+                amount: parseInt(amount),
+                method: method,
+                trxid: trx,
+                status: "Pending",
+                time: Date.now()
+            }).then(() => {
+                alert("আপনার রিকোয়েস্ট পাঠানো হয়েছে। এডমিন চেক করে ব্যালেন্স অ্যাড করে দিবে।");
+                location.href = "index.html";
+            });
+        }
+    </script>
+</body>
+</html>
