@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID Login/Signup</title>
+    <title>Login - TrustEarn</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="auth-card">
-        <h2>অ্যাকাউন্ট খুলুন / লগইন</h2>
+        <h2>TrustEarn Access</h2>
         <input type="email" id="email" placeholder="ইমেইল">
-        <input type="password" id="password" placeholder="পাসওয়ার্ড (৬ অক্ষর)">
+        <input type="password" id="password" placeholder="পাসওয়ার্ড">
         <input type="text" id="ref-by" placeholder="রেফার কোড (ঐচ্ছিক)">
+        
         <button onclick="handleAuth('signup')">নতুন আইডি খুলুন</button>
-        <button onclick="handleAuth('login')" style="background:#6c757d;">লগইন করুন</button>
+        <button onclick="handleAuth('login')" style="background:#6c757d; margin-top:10px;">লগইন করুন</button>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
     <script src="app.js"></script>
 </body>
 </html>
