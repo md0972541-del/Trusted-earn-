@@ -1,7 +1,8 @@
-<div class="auth-container">
-    <h2>TrustEarn Login</h2>
-    <input type="email" id="email" placeholder="ইমেইল">
-    <input type="password" id="password" placeholder="পাসওয়ার্ড">
-    <button onclick="login()">লগইন</button>
-    <button onclick="signup()">অ্যাকাউন্ট খুলুন</button>
+<div class="auth-card">
+    <h2>ID খুলুন বা লগইন করুন</h2>
+    <input type="email" id="email" placeholder="আপনার ইমেইল">
+    <input type="password" id="password" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
+    <input type="text" id="ref-code" placeholder="রেফার কোড (ঐচ্ছিক)">
+    <button onclick="handleAuth('signup')">নতুন অ্যাকাউন্ট খুলুন</button>
+    <button onclick="handleAuth('login')" style="background:#6c757d;">লগইন করুন</button>
 </div>
