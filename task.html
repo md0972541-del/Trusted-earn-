@@ -1,0 +1,22 @@
+<div class="task-card">
+    <h2>টাস্ক পূরণ করে ৫ টাকা নিন</h2>
+    <div id="timer">বাটনে ক্লিক করুন</div>
+    <button id="ad-btn" onclick="startTask()">টাস্ক শুরু করুন</button>
+</div>
+<script>
+    function startTask() {
+        // তোমার সেই Adsterra Smartlink
+        window.open("https://www.effectivegatecpm.com/gq9vqi27?key=25db0688adaf0322fd73b296bfd41f87", "_blank");
+        let sec = 15; [cite: 2026-01-14]
+        document.getElementById('ad-btn').disabled = true;
+        let timer = setInterval(() => {
+            document.getElementById('timer').innerHTML = sec + " সেকেন্ড বাকি...";
+            sec--;
+            if(sec < 0) {
+                clearInterval(timer);
+                alert("টাস্ক সফল! ব্যালেন্স চেক করুন।");
+                location.href="index.html";
+            }
+        }, 1000);
+    }
+</script>
